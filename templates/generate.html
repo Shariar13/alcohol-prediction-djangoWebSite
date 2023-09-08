@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+body {
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+.suggestion {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.preferences {
+    font-size: 16px;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.preferences h3 {
+    font-size: 18px;
+}
+</style>
+
+<div class="container">
+    <h1>Your Alcohol Suggestion:</h1>
+    <div class="suggestion">
+        {{ description }}
+    </div>
+</div>
+
+{% endblock content %}

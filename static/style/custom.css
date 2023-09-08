@@ -1,0 +1,65 @@
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600;1,700&display=swap');
+
+
+:root {
+    --font-title: 'Inter', sans-serif;
+    ;
+    --font-primary: 'Poppins', sans-serif;
+    --color-primary: #1E2754;
+    --color-scondary: #ffffff;
+    --bg-primary: #0058DC;
+}
+
+.title-section {
+    background: #0079DC;
+    ;
+}
+
+
+
+/* occasion */
+
+.select-btn-area button {
+    text-transform: capitalize;
+    font-family: var(--font-title);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.07);
+}
+
+
+
+/* page 1 */
+.get-area {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.07);
+}
+
+/* feedback */
+.logo-title {
+    font-family: var(--font-primary);
+}
+
+.feedback-box, .feedback-box:focus {
+    border-radius: 10px;
+    border: 1px solid #BBC6FF;
+    background: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.07);
+    outline: none;
+
+}
+.feedback-box::placeholder{
+    color: #7B7B7B;
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 500;
+    line-height: normal;
+    outline: none;
+}
+
+
+/* range bar */
+
+
+.active{
+    background-color:#0058dc !important;
+    color: white !important;
+}

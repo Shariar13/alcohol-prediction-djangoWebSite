@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE>
+<html lang="en" html data-theme='light'>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alcohol Suggestion App</title>
+    <link rel="shortcut icon" href="{% static 'assets/fav-icon.png' %}" type="image/x-icon">
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- tailwind css -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.5.1/dist/full.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'style/custom.css' %}">
+
+    <style>
+        .title-section {
+            height: 198px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            overflow: hidden;
+            background: linear-gradient(to right, #0079DC 50%, white 50%);
+            text-align: center;
+            color: white;
+        }
+
+        .first {
+
+            width: 100%;
+            height: 99px;
+            margin: 0px;
+            padding-top: 0px;
+            padding-right: 0px;
+            border-bottom-right-radius: 199px;
+            overflow: hidden;
+            background-color: #0079DC;
+
+        }
+
+        .nav-tab {
+            width: 100%;
+            height: 99px;
+            margin: 0px;
+            padding-top: 0px;
+            padding-right: 0px;
+            background-color: white;
+            align-self: flex-end;
+            border-top-left-radius: 199px;
+            /* Align at the baseline */
+            overflow: hidden;
+        }
+    </style>
+
+
+
+
+</head>
+
+<body>
+
+
+    <!-- header -->
+    <header>
+        <section class="title-section">
+            <div class="first">
+                <h1>Liquors.ai</h1>
+            <p>Powered by ChatGPT</p>
+            </div>
+            <div class="nav-tab">
+
+            </div>
+        </section>
+
+
+
+    </header>
+
+
+    <div class="main">
+        {% block content %}
+
+        {% endblock content %}
+
+    </div>
+
+
+
+
+
+
+
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>

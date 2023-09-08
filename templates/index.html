@@ -1,0 +1,284 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .selected-option {
+        background-color: #0058dc;
+        color: white;
+    }
+</style>
+<form method="post" action="{% url 'alcohol_suggest' %}">
+    {% csrf_token %}
+
+    <!-- range area -->
+    <section class="range-slider container w-[90%] mx-auto">
+        <span class="output outputOne"></span>
+        <span class="output outputTwo"></span>
+        <span class="full-range"></span>
+        <span class="incl-range"></span>
+        <input name="rangeOne" value="" min="0" max="100" step="1" type="range">
+        <input name="rangeTwo" value="" min="0" max="100" step="1" type="range">
+    </section>
+
+    <main class="w-[90%] mx-auto">
+        <!-- occasion -->
+        <section class="mt-24">
+            <h2 class="text-[#1E2754] font-bold text-2xl mb-4">What’s the occasion?</h2>
+            <ul id="occasion-containers" class="select-btn-area flex flex-wrap gap-2 btn-containers">
+                <li>
+                    <input type="radio" name="occasion" id="dinner" value="dinner time" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover:bg-[#0058dc]"
+                        for="dinner">dinner</label>
+                </li>
+                <li>
+                    <input type="radio" name="occasion" id="celebration" value="celebration" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover:bg-[#0058dc]"
+                        for="celebration">celebration</label>
+                </li>
+                <li>
+                    <input type="radio" name="occasion" id="casual-Gathering" value="casual gathering" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover:bg-[#0058dc]"
+                        for="casual-Gathering">Casual Gathering</label>
+                </li>
+                <li>
+                    <input type="radio" name="occasion" id="relaxation" value="relaxation" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover:bg-[#0058dc]"
+                        for="relaxation">relaxation</label>
+                </li>
+                <li>
+                    <input type="radio" name="occasion" id="a-date" value="date" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover:bg-[#0058dc]"
+                        for="a-date">A Date</label>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Flavour -->
+        <section class="mt-24">
+            <h2 class="text-[#1E2754] font-bold text-2xl mb-4">Choose a flavor:</h2>
+            <ul class="select-btn-area flex flex-wrap gap-2 btn-containers">
+                <li>
+                    <input type="radio" name="flavour" id="sweet" value="sweet" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover:bg-[#0058dc]"
+                        for="sweet">sweet</label>
+                </li>
+                <li>
+                    <input type="radio" name="flavour" id="dry" value="dry" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover:bg-[#0058dc]"
+                        for="dry">Dry</label>
+                </li>
+                <li>
+                    <input type="radio" name="flavour" id="fruity" value="fruity" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover:bg-[#0058dc]"
+                        for="fruity">fruity</label>
+                </li>
+                <li>
+                    <input type="radio" name="flavour" id="spicy" value="spicy" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover:bg-[#0058dc]"
+                        for="spicy">spicy</label>
+                </li>
+                <li>
+                    <input type="radio" name="flavour" id="full-fodied" value="ull fodied" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover:bg-[#0058dc]"
+                        for="full-fodied">Full-Bodied</label>
+                </li>
+                <li>
+                    <input type="radio" name="flavour" id="light&crisp" value="light & crisp" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover:bg-[#0058dc]"
+                        for="light&crisp">Light & Crisp</label>
+                </li>
+            </ul>
+        </section>
+
+        <!-- alcohol type -->
+        <section class="mt-24">
+            <h2 class="text-[#1E2754] font-bold text-2xl mb-4">Alcohol Type:</h2>
+            <ul class="select-btn-area flex flex-wrap gap-2 btn-containers">
+                <li>
+                    <input type="radio" name="alcohol-type" id="dont-know" value="unknown" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="dont-know">Don't Know</label>
+                </li>
+                <li>
+                    <input type="radio" name="alcohol-type" id="red-wine" value="red wine" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="red-wine">Red Wine</label>
+                </li>
+                <li>
+                    <input type="radio" name="alcohol-type" id="white-wine" value="white wine" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="white-wine">White Wine</label>
+                </li>
+                <li>
+                    <input type="radio" name="alcohol-type" id="rose-wine" value="rose wine" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="rose-wine">Rose Wine</label>
+                </li>
+                <li>
+                    <input type="radio" name="alcohol-type" id="sparkling-wine" value="sparkling wine" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="sparkling-wine">Sparkling Wine</label>
+                </li>
+                <li>
+                    <input type="radio" name="alcohol-type" id="champagne" value="champagne" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="champagne">Champagne</label>
+                </li>
+                <li>
+                    <input type="radio" name="alcohol-type" id="cocktail" value="cocktail" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="cocktail">Cocktail</label>
+                </li>
+            </ul>
+        </section>
+
+        <!-- drinking time -->
+        <section class="mt-24">
+            <h2 class="text-[#1E2754] font-bold text-2xl mb-4">When are you drinking?</h2>
+            <ul class="select-btn-area flex flex-wrap gap-2 btn-containers">
+                <li>
+                    <input type="radio" name="drinking-time" id="daytime" value="daytime" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="daytime">Daytime</label>
+                </li>
+                <li>
+                    <input type="radio" name="drinking-time" id="evening" value="evening" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="evening">Evening</label>
+                </li>
+                <li>
+                    <input type="radio" name="drinking-time" id="nighttime" value="nighttime" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="nighttime">Nighttime</label>
+                </li>
+                <li>
+                    <input type="radio" name="drinking-time" id="weekend" value="weekend" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="weekend">Weekend</label>
+                </li>
+                <li>
+                    <input type="radio" name="drinking-time" id="special-occasion" value="special occasion"
+                        class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="special-occasion">Special Occasion</label>
+                </li>
+            </ul>
+        </section>
+
+
+        <!-- food pairing -->
+        <section class="mt-24">
+            <h2 class="text-[#1E2754] font-bold text-2xl mb-4">Alcohol By Volume: </h2>
+            <ul class="select-btn-area flex flex-wrap gap-2 btn-containers">
+                <li>
+                    <input type="radio" name="food-pairing" id="no-food" value=".5% - 5%" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="no-food">.5% - 5%</label>
+                </li>
+                <li>
+                    <input type="radio" name="food-pairing" id="seafood" value="5% - 10%" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="seafood">5% - 10%</label>
+                </li>
+                <li>
+                    <input type="radio" name="food-pairing" id="red-meat" value="10% - 15%" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="red-meat">10% - 15%</label>
+                </li>
+                <li>
+                    <input type="radio" name="food-pairing" id="poultry" value="above 15%" class="hidden">
+                    <label
+                        class="btn rounded-full px-7 bg-[#F4F3FF] text-[#1E2754] text-lg font-normal border border-[#BBC6FF] capitalize hover:text-white hover-bg-[#0058dc]"
+                        for="poultry">Above 15%</label>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <div class="generate-btn text-center mt-16">
+        <button type="submit"
+            class="px-10 py-2 bg-[#0058dc] text-white rounded-full text-xl font-medium hover:bg-opacity-90">Generate</button>
+    </div>
+</form>
+<script>
+    // Range slider
+    const rangeOne = document.querySelector("input[name='rangeOne']");
+    const rangeTwo = document.querySelector("input[name='rangeTwo']");
+    const outputOne = document.querySelector(".outputOne");
+    const outputTwo = document.querySelector(".outputTwo");
+    const fullRange = document.querySelector(".full-range");
+    const inclRange = document.querySelector(".incl-range");
+
+    rangeOne.addEventListener("input", updateRange);
+    rangeTwo.addEventListener("input", updateRange);
+
+    function updateRange() {
+        const valueOne = rangeOne.value;
+        const valueTwo = rangeTwo.value;
+        outputOne.textContent = `$${valueOne}`;
+        outputTwo.textContent = `$${valueTwo}`;
+        inclRange.style.left = `$${(valueOne / 100) * 100}`;
+        inclRange.style.width = `$${((valueTwo - valueOne) / 100) * 100}`;
+    }
+</script>
+
+<script>
+    // JavaScript to add selected-option class on click and display selected option text
+    const optionLabels = document.querySelectorAll(".btn");
+    const selectedOptions = {};
+
+    optionLabels.forEach(label => {
+        label.addEventListener("click", () => {
+            // Get the question for this option
+            const question = label.closest("section").querySelector("h2").textContent;
+
+            // Remove selected-option class from all labels in this question
+            optionLabels.forEach(otherLabel => {
+                if (otherLabel.closest("section").querySelector("h2").textContent === question) {
+                    otherLabel.classList.remove("selected-option");
+                }
+            });
+
+            // Add selected-option class to the clicked label
+            label.classList.add("selected-option");
+
+            // Store the selected option in the JavaScript object
+            selectedOptions[question] = label.textContent;
+
+            // Update the designated display area for this question
+            const displayArea = label.closest("section").querySelector("#selected-alcohol-volume");
+            if (displayArea) {
+                displayArea.textContent = `Selected: ${selectedOptions[question]}`;
+            }
+        });
+    });
+</script>
+
+{% endblock %}

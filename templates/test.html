@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .btn {
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <button class="btn" id="btn1">Button 1</button>
+    <button class="btn" id="btn2">Button 2</button>
+    <button class="btn" id="btn3">Button 3</button>
+
+    <script>
+        // Get all buttons with class "btn"
+        const buttons = document.querySelectorAll('.btn');
+
+        // Add a click event listener to each button
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove the "active" class from all buttons
+                buttons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Add the "active" class to the clicked button
+                button.classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
