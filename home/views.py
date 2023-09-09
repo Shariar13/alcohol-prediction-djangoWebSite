@@ -6,21 +6,41 @@ from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.shortcuts import render
+from .models import FeedBack
 
+
+def home1(request):
+    return render(request, "index.html")
 
 def home(request):
-    return render(request, "index.html")
+    return render (request, "page-1.html")
+
+def feedback(request):
+    if request.method == "POST":
+        feedback = request.POST['feedback']
+        feedback_database = FeedBack(feedback = feedback)
+        feedback_database.save()
+        return redirect ('thank_you')
+    
+def thank_you(request):
+    return render(request, "page-3.html")
+
+
+
+def loading_screen(request):
+    return render(request, 'loading_sc.html')
+
 
 
 from django.shortcuts import render
 import openai
 
 # Your OpenAI API key
-api_key = "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"
+api_key = "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"
 
 def get_alcohol_suggestion(answers):
     # Create a prompt that simulates a conversation.
-    prompt = f"User: Suggest me a real drink name with it's appromoxe price, type, bootle size, short description in my preferences region based on these preferences: Occasion: {answers['Occasion']}, Flavour: {answers['Flavour']}, Alcohol Type: {answers['Alcohol Type']}, Time: {answers['Time']}, Region: {answers['Region']}, Alcohol Volume: {answers['Alcohol Volume']}\nAI: "
+    prompt = f"User: Suggest me a real drink name with it's appromoxe price, type, bootle size, short description in my preferences region based on these preferences: Occasion: {answers['Occasion']}, Flavour: {answers['Flavour']}, Alcohol Type: {answers['Alcohol Type']}, Time: {answers['Time']}, Region: {answers['Region']}, Alcohol Volume: {answers['Alcohol Volume']}, Price Range: {answers['range1']} to Price Range: {answers['range2']}\nAI: "
     # Make a request to the ChatGPT API.
     response = openai.Completion.create(
         engine="text-davinci-002",
@@ -77,6 +97,8 @@ def alcohol_suggest(request):
         time = request.POST.get("drinking-time", "")
         region = request.POST.get("alcohol-region", "")
         volume = request.POST.get("food-pairing", "")
+        rang1 = request.POST.get("rangeOne", "")
+        range2 = request.POST.get("rangeTwo", "")
 
         # Create a dictionary to store user preferences.
         user_preferences = {
@@ -86,6 +108,8 @@ def alcohol_suggest(request):
             "Time": time,
             "Region": region,
             "Alcohol Volume": volume,
+            "range1": rang1,
+            "range2": range2,
         }
 
         # Get the alcohol suggestion from ChatGPT.
